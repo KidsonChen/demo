@@ -1,11 +1,7 @@
 package com.example.demo.diet_record_pool.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.diet_record_pool.DTO.DietRecordDTO;
 import com.example.demo.diet_record_pool.entity.DietRecord;
@@ -14,8 +10,11 @@ import com.example.demo.diet_record_pool.service.DietRecordService;
 @RestController
 @RequestMapping("/api")
 public class DietRecordController {
-    @Autowired
-    private DietRecordService dietRecordService;
+    private final DietRecordService dietRecordService;
+
+    public DietRecordController(DietRecordService dietRecordService) {
+        this.dietRecordService = dietRecordService;
+    }
 
     @PostMapping("/diet-record")
     public ResponseEntity<String> saveDietRecord(@RequestBody DietRecordDTO dietRecordDTO) {
@@ -26,13 +25,5 @@ public class DietRecordController {
         DietRecord savedRecord = dietRecordService.saveDietRecord(dietRecordDTO, userId);
 
         return ResponseEntity.ok("飲食記錄已成功保存，ID: " + savedRecord.getId());
-    }
-
-    public DietRecordService getDietRecordService() {
-        return dietRecordService;
-    }
-
-    public void setDietRecordService(DietRecordService dietRecordService) {
-        this.dietRecordService = dietRecordService;
     }
 }
