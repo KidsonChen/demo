@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>健康飲食追蹤 - 飲食記錄</title>
+  <style>
+    :root {
+      --primary: #38b2ac;
+      --primary-dark: #2c9a9d;
+      --secondary: #f6ad55;
+      --secondary-hover: #ed8936;
+      --text: #2d3748;
+      --bg-light: #f7fafc;
+      --bg-white: #ffffff;
+      --border: #e2e8f0;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .greeting {
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--bg-white);
+      box-shadow: 0 4px 12px var(--shadow);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+    
+    h1 {
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 25px;
+      text-align: center;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 15px;
+    }
+    
+    .meal-section {
+      margin: 25px 0;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: var(--bg-light);
+    }
+    
+    .meal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .select-container {
+      position: relative;
+      margin-right: 15px;
+    }
+    
+    select, input[type="time"] {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: var(--bg-white);
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+    
+    .select-container::after {
+      content: "▼";
+      font-size: 12px;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    #addFoodBtn {
+      background-color: var(--secondary);
+      margin-bottom: 20px;
+    }
+    
+    #addFoodBtn:hover {
+      background-color: var(--secondary-hover);
+    }
+    
+    .food-items {
+      min-height: 50px;
+      padding: 10px;
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      margin-bottom: 15px;
+    }
+    
+    .submit-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .submit-btn {
+      padding: 12px 30px;
+      font-size: 18px;
+      background-color: var(--secondary);
+    }
+    
+    .submit-btn:hover {
+      background-color: var(--secondary-hover);
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .meal-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .select-container {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+      }
+      
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="greeting" th:text="${username} + '，您好'"></div>
+  
+  <div class="container">
+    <h1>飲食記錄</h1>
+    
+    <button id="addFoodBtn">新增食物選項</button>
+    
+    <form id="dietForm">
+      <div class="meal-section">
+        <div class="meal-header">
+          <div class="select-container">
+            <select name="mealType" id="mealType">
+              <option value="">選擇餐別</option>
+              <option value="breakfast">早餐</option>
+              <option value="lunch">午餐</option>
+              <option value="dinner">晚餐</option>
+              <option value="snack">點心</option>
+              <option value="fruit">水果</option>
+            </select>
+          </div>
+          
+          <input type="time" name="mealTime" id="mealTime" />
+        </div>
+        
+        <div id="meal" class="food-items"></div>
+        
+        <button type="button" onclick="addFoodItem('meal')">添加食物</button>
+      </div>
+      
+      <div class="submit-container">
+        <button type="submit" class="submit-btn">提交記錄</button>
+      </div>
+    </form>
+  </div>
+  
+  <script th:src="@{/js/diet_record.js}"></script>
+</body>
+</html>

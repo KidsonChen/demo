@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>會員註冊</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .register-form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      input {
+        display: block;
+        margin: 10px 0;
+        padding: 5px;
+        width: 200px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .error {
+        color: red;
+        font-size: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="register-form">
+      <h2>會員註冊</h2>
+      <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+        <div>
+            <label for="username">姓名:</label>
+            <input type="text" id="username" th:field="*{username}" />
+        </div>
+        <div>
+            <label for="password">密碼:</label>
+            <input type="password" id="password" th:field="*{password}" />
+        </div>
+        <div>
+            <label for="useremail">Email:</label>
+            <input type="email" id="useremail" th:field="*{useremail}" />
+        </div>
+        <div>
+            <button type="submit">註冊</button>
+        </div>
+        <div th:if="${error}">
+            <p th:text="${error}"></p>
+        </div>
+    </form>
+      <p>已有帳號? <a href="login.html">登入</a></p>
+      <p id="errorMessage" class="error"></p>
+    </div>
+    <script>
+      document
+        .querySelector("#registerForm")
+        .addEventListener("submit", function (event) {
+          if (
+            document.querySelector("#password").value !==
+            document.querySelector("#confirmPassword").value
+          ) {
+            event.preventDefault();
+            document.querySelector("#errorMessage").textContent = "密碼不一致";
+          }
+        });
+    </script>
+  </body>
+</html>

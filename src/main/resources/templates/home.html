@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f7fa;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px 20px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 40px;
+      }
+      
+      h1 {
+        color: #2c3e50;
+        font-size: 28px;
+        margin-bottom: 20px;
+        text-align: center;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 15px;
+      }
+      
+      p {
+        font-size: 16px;
+        margin-bottom: 25px;
+        text-align: center;
+      }
+      
+      .record {
+        margin: 30px 0;
+        text-align: center;
+      }
+      
+      .record a {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      
+      .record a:hover {
+        background-color: #2980b9;
+      }
+      
+      form {
+        text-align: center;
+        margin-top: 30px;
+      }
+      
+      button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      
+      button:hover {
+        background-color: #c0392b;
+      }
+      
+      /* 響應式設計 */
+      @media (max-width: 600px) {
+        .container {
+          margin-top: 20px;
+          padding: 20px 15px;
+        }
+        
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>歡迎使用飲食紀錄</h1>
+      <p>您已成功登入!</p>
+      <div class="record">
+        <a th:href="@{/diet_record}">飲食紀錄</a>
+      </div>
+      <form action="/logout" method="post">
+        <button type="submit">登出</button>
+      </form>
+    </div>
+  </body>
+</html>
